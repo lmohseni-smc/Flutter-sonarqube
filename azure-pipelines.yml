@@ -10,6 +10,8 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- script: sudo snap install flutter --classic
+  displayName: 'Install the flutter environment'
 - script: ./run_script.sh
   displayName: 'Execute all build targets'
 
