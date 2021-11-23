@@ -12,6 +12,12 @@ pool:
 steps:
 - script: sudo snap install flutter --classic
   displayName: 'Install the flutter environment'
+
+- script: |
+    echo 'Running Flutter Doctor'
+    flutter doctor
+    displayName: 'Run a multi-line script'
+
 - script: ./run_script.sh
   displayName: 'Execute all build targets'
 
