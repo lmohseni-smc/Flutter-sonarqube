@@ -16,7 +16,7 @@ steps:
 - script: |
     echo 'Running Flutter Doctor'
     flutter doctor
-    displayName: 'Run a multi-line script'
+  displayName: 'Run a multi-line script'
 
 - script: ./run_script.sh
   displayName: 'Execute all build targets'
