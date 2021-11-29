@@ -10,7 +10,10 @@ pool:
   vmImage: macOS-11
 
 steps:
-- script: sudo snap install flutter --classic
+- script: |
+    git clone https://github.com/flutter/flutter.git -b stable
+    export PATH="$PATH:`pwd`/flutter/bin"
+    flutter doctor
   displayName: 'Install the flutter environment'
 
 - script: |
