@@ -14,17 +14,5 @@ steps:
     git clone https://github.com/flutter/flutter.git -b stable
     export PATH="$PATH:`pwd`/flutter/bin"
     flutter doctor
+    ./run_script.sh
   displayName: 'Install the flutter environment'
-
-- script: |
-    echo 'Running Flutter Doctor'
-    flutter doctor
-  displayName: 'Run a multi-line script'
-
-- script: ./run_script.sh
-  displayName: 'Execute all build targets'
-
-#- script: |
-#    echo Add other tasks to build, test, and deploy your project.
-#    echo See https://aka.ms/yaml
-#  displayName: 'Run a multi-line script'
