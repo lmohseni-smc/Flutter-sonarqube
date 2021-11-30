@@ -109,3 +109,5 @@ Thank you for your interest in contributing to Flutter Starter! We are lucky to 
 
 Licensed under the MIT License, Copyright © 2020 GeekyAnts.
 See [LICENSE](https://github.com/GeekyAnts/flutter-starter/blob/master/LICENSE) for more information.
+
+
