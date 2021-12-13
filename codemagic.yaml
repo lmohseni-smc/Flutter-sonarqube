@@ -41,6 +41,8 @@ workflows:
   ios-sonarcloud:
     name: iOS sonarcloud
     environment:
+      groups:
+        - sonar
       vars:
         XCODE_PROJECT: "swiftqube.xcodeproj"
         XCODE_SCHEME: "swiftqube"
