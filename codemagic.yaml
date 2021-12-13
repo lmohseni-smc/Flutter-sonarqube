@@ -36,20 +36,7 @@ workflows:
       - find . -name "Podfile" -execdir pod install \;
       - flutter build ios --debug --no-codesign
       - brew install sonar-scanner
-      - sonar-scanner \
-          -Dsonar.organization=$SONAR_ORG_KEY \
-          -Dsonar.projectKey=$SONAR_PROJECT_KEY \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=$SONAR_TOKEN \
-          -Dsonar.projectVersion=1.0.0 \
-          -Dsonar.sources=. \
-          -Dsonar.cfamily.build-wrapper-output.bypass=true \
-          -Dsonar.coverageReportPaths=sonarqube-generic-coverage.xml \
-          -Dsonar.c.file.suffixes=- \
-          -Dsonar.cpp.file.suffixes=- \
-          -Dsonar.objc.file.suffixes=- \
-          -Dsonar.branch.name=$FCI_BRANCH \
-          -Dsonar.branch.target=$FCI_PULL_REQUEST_DEST
+      - sonar-scanner \ -Dsonar.organization=$SONAR_ORG_KEY \ -Dsonar.projectKey=$SONAR_PROJECT_KEY \ -Dsonar.host.url=https://sonarcloud.io \ -Dsonar.login=$SONAR_TOKEN \ -Dsonar.sources=. \
     artifacts:
       - build/**/outputs/apk/**/*.apk
       - build/**/outputs/bundle/**/*.aab
