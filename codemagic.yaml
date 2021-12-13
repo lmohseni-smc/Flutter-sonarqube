@@ -45,9 +45,6 @@ workflows:
         XCODE_PROJECT: "swiftqube.xcodeproj"
         XCODE_SCHEME: "swiftqube"
         BUNDLE_ID: "io.codemagic.swiftqube"
-        SONAR_TOKEN: Encrypted(YjI2OTM3NDY0YWFiN2ZkOWNhZTU2ZWM2OWUzZjYzMTBmMWRlNTdmNQ==)
-        SONAR_PROJECT_KEY: Encrypted(bG1vaHNlbmktc21jX0ZsdXR0ZXItc29uYXJxdWJl)
-        SONAR_ORG_KEY: Encrypted(bG1vaHNlbmktc21j)
       xcode: 12.5
       cocoapods: default
     triggering:
