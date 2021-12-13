@@ -37,12 +37,7 @@ workflows:
       - flutter build ios --debug --no-codesign
       - brew install sonar-scanner
       - | 
-        sonar-scanner  
-          -Dsonar.organization=$SONAR_ORG_KEY 
-          -Dsonar.projectKey=$SONAR_PROJECT_KEY 
-          -Dsonar.host.url=https://sonarcloud.io 
-          -Dsonar.login=$SONAR_TOKEN 
-          -Dsonar.sources=.
+        sonar-scanner  -Dsonar.organization=$SONAR_ORG_KEY -Dsonar.projectKey=$SONAR_PROJECT_KEY -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.sources=./lib
     artifacts:
       - build/**/outputs/apk/**/*.apk
       - build/**/outputs/bundle/**/*.aab
