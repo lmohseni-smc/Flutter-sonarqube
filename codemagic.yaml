@@ -6,6 +6,13 @@ workflows:
       flutter: stable
       xcode: latest
       cocoapods: default
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
     scripts:
       - |
         # set up debug keystore
@@ -26,58 +33,8 @@ workflows:
       - flutter build appbundle --debug
       - find . -name "Podfile" -execdir pod install \;
       - flutter build ios --debug --no-codesign
-    artifacts:
-      - build/**/outputs/apk/**/*.apk
-      - build/**/outputs/bundle/**/*.aab
-      - build/**/outputs/**/mapping.txt
-      - build/ios/ipa/*.ipa
-      - /tmp/xcodebuild_logs/*.log
-      - build/windows/**/*.msix
-      - flutter_drive.log
-    publishing:
-      email:
-        recipients:
-          - logan.mohseni@singlemindconsulting.com
-  ios-sonarcloud:
-    name: iOS sonarcloud
-    environment:
-      groups:
-        - sonar
-      vars:
-        XCODE_PROJECT: "swiftqube.xcodeproj"
-        XCODE_SCHEME: "swiftqube"
-        BUNDLE_ID: "io.codemagic.swiftqube"
-      xcode: 12.5
-      cocoapods: default
-    triggering:
-      events:
-        - push
-      branch_patterns:
-        - pattern: main
-          include: true
-          source: true
-    scripts:
-      - name: Install Sonar Scanner
-        script: | 
-          brew install sonar-scanner
-      - name: Generate debug build
-        script: | 
-          xcodebuild \
-          -project "$XCODE_PROJECT" \
-          -scheme "$XCODE_SCHEME" \
-          -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.5' \
-          -derivedDataPath Build/ \
-          -enableCodeCoverage YES \
-          clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-      - name: Convert coverage report to Sonarqube format
-        script: |             
-          bash xccov-to-sonarqube-generic.sh Build/Logs/Test/*.xcresult/ > sonarqube-generic-coverage.xml
-      - name: Generate and upload code analysis report
-        script: |  
-          export PATH=$PATH:$FCI_BUILD_DIR/sonar-scanner/bin
-          
-          sonar-scanner \
+      - brew install sonar-scanner
+      - sonar-scanner \
           -Dsonar.projectKey=$SONAR_PROJECT_KEY \
           -Dsonar.organization=$SONAR_ORG_KEY \
           -Dsonar.host.url=https://sonarcloud.io \
@@ -91,4 +48,15 @@ workflows:
           -Dsonar.objc.file.suffixes=- \
           -Dsonar.branch.name=$FCI_BRANCH \
           -Dsonar.branch.target=$FCI_PULL_REQUEST_DEST
-
+    artifacts:
+      - build/**/outputs/apk/**/*.apk
+      - build/**/outputs/bundle/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - build/windows/**/*.msix
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - logan.mohseni@singlemindconsulting.com
