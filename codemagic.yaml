@@ -34,6 +34,7 @@ workflows:
       - find . -name "Podfile" -execdir pod install \;
       - flutter build ios --debug --no-codesign
       - flutter analyze
+      - flutter pub run dart_code_metrics:metrics analyze lib
     artifacts:
       - build/**/outputs/apk/**/*.apk
       - build/**/outputs/bundle/**/*.aab
