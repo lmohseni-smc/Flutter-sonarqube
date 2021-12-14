@@ -6,8 +6,6 @@ workflows:
       flutter: stable
       xcode: latest
       cocoapods: default
-      groups:
-        - sonar
     triggering:
       events:
         - push
@@ -35,9 +33,7 @@ workflows:
       - flutter build appbundle --debug
       - find . -name "Podfile" -execdir pod install \;
       - flutter build ios --debug --no-codesign
-      - brew install sonar-scanner
-      - | 
-        sonar-scanner  -Dsonar.organization=$SONAR_ORG_KEY -Dsonar.projectKey=$SONAR_PROJECT_KEY -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.sources=./lib
+      - flutter analyze
     artifacts:
       - build/**/outputs/apk/**/*.apk
       - build/**/outputs/bundle/**/*.aab
