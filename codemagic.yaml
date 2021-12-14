@@ -33,7 +33,7 @@ workflows:
       - flutter build appbundle --debug
       - find . -name "Podfile" -execdir pod install \;
       - flutter build ios --debug --no-codesign
-      - flutter analyze
+      - flutter analyze --write=analyzer-output.txt
       - flutter pub run dart_code_metrics:metrics analyze lib
     artifacts:
       - build/**/outputs/apk/**/*.apk
@@ -43,6 +43,7 @@ workflows:
       - /tmp/xcodebuild_logs/*.log
       - build/windows/**/*.msix
       - flutter_drive.log
+      - analyzer-output.txt
     publishing:
       email:
         recipients:
