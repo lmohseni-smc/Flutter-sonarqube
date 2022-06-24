@@ -1,6 +1,6 @@
 {
-    "name": "flutter_skeleton",
-    "short_name": "flutter_skeleton",
+    "name": "flutter_sonarqube",
+    "short_name": "flutter_sonarqube",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
